@@ -1,33 +1,41 @@
 # AGENTS.md
 
-## Equipe do Projeto
+## Projeto individual
 
-### Integrante único
+### Desenvolvedor único
 
-Responsável por todas as áreas do projeto.
+Responsável por todas as camadas do sistema.
 
-## Divisão de Responsabilidades
+---
 
-### Desenvolvimento Back-end
+## Responsabilidades
 
-* APIs
+### Backend
+
+* Spring Boot
+* API REST
+* WebSocket (STOMP)
 * Regras de negócio
-* Banco de dados
 
-### Desenvolvimento Front-end
+### Frontend
 
-* Telas
-* Responsividade
-* Experiência do usuário
+* Thymeleaf
+* Interface do cardápio
+* Painel da cozinha
+
+### Banco de dados
+
+* Modelagem
+* Relacionamentos
+* Persistência
+
+### Tempo real
+
+* Integração WebSocket
+* Notificação de novos pedidos
 
 ### Documentação
 
 * README
-* Requisitos
-* Relatórios
-
-### Testes
-
-* Fluxo de pedidos
-* Cadastro de produtos
-* Login
+* Requirements
+* SPECS
