@@ -38,9 +38,13 @@ Clientes poderão adicionar itens ao carrinho antes de finalizar pedido.
 
 O cliente poderá enviar pedido ao estabelecimento.
 
-### RF08 - Status do pedido
+### RF08 - Atualização de pedidos em tempo real
 
-Administrador poderá atualizar status: Recebido, Em preparo, Pronto, Entregue.
+O sistema deve enviar novos pedidos  em tempo real para o painel da cozinha usando WebSocket
+
+### RF09 - Atualização de status de pedido
+
+O administrador pode alterar o status do pedido (Recebido, Em preparo, Pronto, Entregue)
 
 ## Requisitos Não Funcionais
 
@@ -59,6 +63,14 @@ Dados armazenados em banco relacional.
 ### RNF04
 
 Sistema com autenticação básica.
+
+### RNF05
+
+Comunicação em tempo real utilizando WebSocket
+
+### RNF06
+
+Sistema deve ser leve e adequado a pequenos negocios
 
 ## Restrições
 
