@@ -5,6 +5,7 @@
 * Java 17
 * Spring Boot
 * Spring MVC
+* Spring WebSocket (STOMP)
 * Thymeleaf
 * MySQL
 * HTML5
@@ -14,10 +15,11 @@
 
 ## Arquitetura
 
-* Controller
-* Service
-* Repository
-* Model
+* Controller (camadas web)
+* Service (regras de negocio)
+* Repository (acesso ao banco)
+* Model (entidades)
+* WebSocket (comunicação em tempo real)
 
 ## Entidades Principais
 
@@ -44,6 +46,15 @@
 * itens
 * valorTotal
 * status
+
+##  Comunicaçao em tempo real
+
+###  WebSocket
+
+*  Endpoint: /ws
+*  Protocolo: STOMP
+*  Canal Principal: /topic/pedidos
+
 
 ## Rotas Principais
 
