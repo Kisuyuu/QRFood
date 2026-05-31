@@ -179,7 +179,7 @@ Usuario (1) ──── (1) Restaurante
 │
 ┌─────────┼─────────┐
 (1:N)│ (1:N)│ (1:N)│
-│         │     │
+│ │ │
 RestauranteMesa Produto Pedido
 │
 (1:N)│
