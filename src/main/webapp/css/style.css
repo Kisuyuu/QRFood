@@ -1,0 +1,929 @@
+/* ============================================================
+   QRFood - Sistema de Pedidos via QR Code
+   Paleta de Cores Principal
+   ============================================================ */
+/*
+   Essas variáveis definem o visual geral do site.
+   Use elas para manter cores, sombras e bordas consistentes em todas as telas.
+*/
+
+:root {
+    /* Base (neutros) */
+    --preto-suave: #0F0F10;
+    --branco-frio: #F5F6FA;
+    --cinza-claro: #D6D8E0;
+    --cinza-medio: #8A8F9A;
+    --cinza-escuro: #2B2D31;
+    
+    /* Cor principal (roxo) */
+    --roxo-principal: #6D28D9;
+    --roxo-escuro: #4C1D95;
+    --roxo-claro: #A78BFA;
+    
+    /* Cores de feedback */
+    --verde-sucesso: #10B981;
+    --vermelho-erro: #EF4444;
+    --amarelo-alerta: #F59E0B;
+    --azul-info: #3B82F6;
+    
+    /* Gradientes */
+    --gradiente-roxo: linear-gradient(135deg, #6D28D9, #4C1D95);
+    --gradiente-card: linear-gradient(145deg, #ffffff, #f8f7ff);
+    
+    /* Sombras */
+    --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --sombra-media: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --sombra-intensa: 0 20px 40px rgba(0, 0, 0, 0.15);
+    
+    /* Bordas */
+    --borda-radius: 16px;
+    --borda-radius-sm: 10px;
+    
+    /* Transições */
+    --transicao-suave: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Reset e Estilos Globais
+   ============================================================ */
+/*
+   Aqui a gente zera margens e paddings, define box-sizing e deixa o corpo
+   com uma base neutra para usar em qualquer página.
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #F5F6FA 0%, #e8e6f0 100%);
+    color: #2B2D31;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   PÁGINA DE AUTENTICAÇÃO (Login/Cadastro)
+   ============================================================ */
+/*
+   Regras que cuidam do visual da tela de login/cadastro do restaurante.
+   Essa parte faz o painel parecer uma caixa central com transição entre telas.
+*/
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.auth-wrapper {
+    position: relative;
+    width: 440px;
+    height: 560px;
+}
+
+.auth-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), 
+                opacity 0.4s ease;
+    backface-visibility: hidden;
+}
+
+/* Card de Login - visível por padrão */
+.auth-card.login-card {
+    z-index: 2;
+    transform: translateX(0);
+}
+
+.auth-card.login-card.slide-out {
+    transform: translateX(-120%) rotateY(-10deg);
+    opacity: 0;
+}
+
+/* Card de Cadastro - escondido à direita */
+.auth-card.register-card {
+    z-index: 1;
+    transform: translateX(120%) rotateY(10deg);
+    opacity: 0;
+}
+
+.auth-card.register-card.slide-in {
+    transform: translateX(0) rotateY(0);
+    opacity: 1;
+    z-index: 3;
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth-logo .logo-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* imagem do logo que aparece dentro dos cards de login/cadastro */
+.logo-icon-img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3);
+    animation: float 3s ease-in-out infinite;
+    object-fit: contain;
+    background: white;
+    padding: 8px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.auth-logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #6D28D9;
+    margin-bottom: 4px;
+}
+
+.auth-logo p {
+    font-size: 14px;
+    color: #8A8F9A;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2B2D31;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #D6D8E0;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #0F0F10;
+    background: #F5F6FA;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #6D28D9;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #8A8F9A;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #6D28D9, #4C1D95);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 40, 217, 0.4);
+}
+
+.btn-auth:active {
+    transform: translateY(0);
+}
+
+.btn-auth::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s;
+}
+
+.btn-auth:active::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #8A8F9A;
+}
+
+.auth-toggle a {
+    color: #6D28D9;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-toggle a:hover {
+    color: #4C1D95;
+    text-decoration: underline;
+}
+
+/* ============================================================
+   CARDÁPIO (CLIENTE)
+   ============================================================ */
+
+.topo-cardapio {
+    background: linear-gradient(135deg, #6D28D9, #4C1D95);
+    color: white;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(109, 40, 217, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.topo-cardapio .logo {
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topo-cardapio .info-mesa {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+.container-principal {
+    max-width: 1300px;
+    margin: 32px auto;
+    padding: 0 24px;
+    padding-bottom: 100px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.produto-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.produto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: #A78BFA;
+}
+
+.produto-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #6D28D9;
+}
+
+.produto-info {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.produto-nome {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F0F10;
+    margin-bottom: 6px;
+}
+
+.produto-desc {
+    font-size: 14px;
+    color: #8A8F9A;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.produto-preco {
+    font-weight: 700;
+    color: #6D28D9;
+    font-size: 24px;
+    display: block;
+}
+
+.produto-acao {
+    padding: 20px;
+    background: #F5F6FA;
+    border-top: 1px solid #D6D8E0;
+}
+
+.input-obs {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 2px solid #D6D8E0;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-obs:focus {
+    outline: none;
+    border-color: #6D28D9;
+    box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+}
+
+.acao-botoes {
+    display: flex;
+    gap: 12px;
+}
+
+.input-qtd {
+    width: 60px;
+    padding: 12px;
+    border: 2px solid #D6D8E0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn-adicionar {
+    flex-grow: 1;
+    background: linear-gradient(135deg, #6D28D9, #4C1D95);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px;
+}
+
+.btn-adicionar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 40, 217, 0.4);
+}
+
+.btn-adicionar:active {
+    transform: translateY(0);
+}
+
+/* Carrinho Flutuante */
+.carrinho-flutuante {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    z-index: 1000;
+    border-radius: 50px;
+    border: 2px solid #6D28D9;
+    backdrop-filter: blur(10px);
+}
+
+.carrinho-resumo {
+    display: flex;
+    flex-direction: column;
+}
+
+#itens-qtd {
+    font-size: 14px;
+    color: #8A8F9A;
+    font-weight: 500;
+}
+
+#total-preco {
+    font-weight: 700;
+    font-size: 22px;
+    color: #6D28D9;
+}
+
+.btn-finalizar {
+    background: linear-gradient(135deg, #6D28D9, #4C1D95);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-finalizar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(109, 40, 217, 0.4);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Toast de notificação */
+.toast {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2B2D31;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    display: none;
+    z-index: 1100;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.toast-success { 
+    background: #10B981; 
+}
+
+.toast-error { 
+    background: #EF4444; 
+}
+
+/* ============================================================
+   PAINEL ADMINISTRATIVO
+   ============================================================ */
+
+.painel-grid {
+    display: grid;
+    gap: 24px;
+    animation: fadeInUp 0.6s ease;
+}
+
+.painel-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    border: 1px solid #D6D8E0;
+}
+
+.painel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #D6D8E0;
+}
+
+.painel-header h2 {
+    font-size: 28px;
+    color: #0F0F10;
+    font-weight: 800;
+}
+
+.painel-section {
+    margin-bottom: 32px;
+}
+
+.painel-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #6D28D9;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #A78BFA;
+    display: inline-block;
+}
+
+.painel-section.dupla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+}
+
+.subcard {
+    border: 2px solid #D6D8E0;
+    border-radius: 16px;
+    padding: 24px;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subcard:hover {
+    border-color: #A78BFA;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.subcard h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #6D28D9;
+    margin-bottom: 16px;
+}
+
+.btn-secondary {
+    background: white;
+    color: #6D28D9;
+    border: 2px solid #6D28D9;
+    border-radius: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-secondary:hover {
+    background: #6D28D9;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 40, 217, 0.3);
+}
+
+/* Lista de Pedidos */
+.orders-list {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+}
+
+.order-card {
+    border: 2px solid #D6D8E0;
+    border-radius: 16px;
+    padding: 20px;
+    background: linear-gradient(145deg, #ffffff, #f8f7ff);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.order-card:hover {
+    border-color: #A78BFA;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.order-card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.order-header-info strong {
+    font-size: 18px;
+    color: #6D28D9;
+    display: block;
+}
+
+.order-time {
+    font-size: 13px;
+    color: #8A8F9A;
+}
+
+.order-body {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.order-item {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #D6D8E0;
+}
+
+.order-item strong {
+    color: #0F0F10;
+    font-size: 15px;
+}
+
+.obs {
+    color: #8A8F9A;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.order-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-status {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-andamento {
+    background: #3B82F6;
+    color: white;
+}
+
+.btn-andamento:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.btn-concluir {
+    background: #10B981;
+    color: white;
+}
+
+.btn-concluir:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+.badge {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badge.em_espera { 
+    background: #fef3c7; 
+    color: #92400e; 
+}
+
+.badge.em_andamento { 
+    background: #dbeafe; 
+    color: #1e40af; 
+}
+
+.badge.concluido { 
+    background: #d1fae5; 
+    color: #065f46; 
+}
+
+/* QR Code */
+.qr-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border: 2px dashed #A78BFA;
+    border-radius: 16px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.qr-box img {
+    max-width: 250px;
+    display: block;
+    margin: 16px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+#qr-url {
+    color: #6D28D9;
+    font-weight: 600;
+    font-size: 13px;
+    word-break: break-all;
+    text-decoration: none;
+}
+
+#qr-url:hover {
+    text-decoration: underline;
+}
+
+/* Produtos Admin */
+#produtos-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.produto-admin-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.produto-admin-info img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.btn-danger {
+    background: #EF4444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Status WebSocket */
+.status-on {
+    color: #10B981;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-on::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-off {
+    color: #8A8F9A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.empty-state {
+    color: #8A8F9A;
+    padding: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ============================================================
+   Responsividade
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .auth-wrapper {
+        width: 90%;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .topo-cardapio {
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .painel-section.dupla {
+        grid-template-columns: 1fr;
+    }
+    
+    .carrinho-flutuante {
+        flex-direction: column;
+        gap: 16px;
+        border-radius: 16px;
+        bottom: 16px;
+    }
+}
